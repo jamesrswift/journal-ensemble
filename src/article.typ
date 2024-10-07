@@ -57,6 +57,15 @@
 #let one-column(alignment, body) = place(
   scope: "parent",
   float: true, 
+  clearance: 3em,
   alignment,
   body,
 )
+
+#let line-numbers() = (body) => {
+  show par.line: set text(size: 7pt)
+  set par.line(
+    numbering: (n) => text(size: 5pt, str(n), baseline: -0.1em),
+  )
+  body
+}
