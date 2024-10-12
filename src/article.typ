@@ -1,3 +1,15 @@
+#import "part.typ"
+
+#let header(citation: [CITATION]) = block(
+  spacing: 3em,
+  stack(
+    dir: ltr,
+    context part.get(),
+    h(1fr),
+    citation
+  )
+)
+
 #let title(body) = {
   set par(justify: false)
   set text(size: 20pt, weight: 450)

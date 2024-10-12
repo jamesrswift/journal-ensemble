@@ -5,7 +5,7 @@
   accent-1: rgb(174,154,73),
   accent-2: rgb(42,59,71),
 ) = (body) => {
-  set page(paper: "a4")
+  set page(paper: "a4", numbering: "1")
   set text(font: "Open Sans")
   set par(leading: 0.75em)
   color-accent-1.update(accent-1)
