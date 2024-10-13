@@ -1,4 +1,5 @@
 #import "part.typ"
+#import "elements.typ"
 
 #let header(citation: [CITATION]) = block(
   spacing: 3em,
@@ -30,6 +31,10 @@
   )
 }
 
+#let dates(input) = {
+  input.map((it)=>[#strong(it.first() + ":") #it.last()]).join(elements.sep)
+}
+
 #let meta(body) = {
   set par(justify: false)
   set text(size: 9pt)
@@ -48,6 +53,16 @@
    body
 }
 
+#let abstract-list(body) = meta({
+  set par(leading: 1em, justify: true)
+  set list(
+    marker: elements.marker, 
+    indent: -1em,
+    tight: false
+  )
+  body
+})
+
 #let rule(
   
 ) = (body) => {
@@ -60,7 +75,19 @@
   set par.line(numbering-scope: "page")
   set text(size: 9pt)
   set heading(numbering: "1.1")
-  show heading: set block(above: 2.5em, below: 1.25em,)
+  show heading: set block(spacing: 1.5em)
+  show figure: (fig) => {
+    show figure.caption:  (caption) => context {
+      strong({
+        caption.supplement
+        sym.space
+        numbering(fig.numbering, ..caption.counter.at(fig.location()))
+      })
+      caption.separator
+      caption.body
+    }
+    fig
+  }
   body
   pagebreak(weak: true)
   counter(heading).update(0)
